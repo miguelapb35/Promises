@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Js Promises</title>
+</head>
+<body>
+<div class="container flow-text">
+  <div class="row">
+    <div class="col s12 text-align-center">
+      <h2>Promises</h2>
+    </div> 
+    <div class="row">
+      <div class="col s12 m9">
+    <pre>
+let p = new Promise((resolve, reject) => {
+  let a = 1 + 1
+  if (a == 2) {
+    resolve('Success')
+  } else {
+    reject('Failed')
+  }
+})
+
+p.then((message) => {
+  console.log('This is in the then ' + message)
+}).catch((message) => {
+  console.log('This is in the catch ' + message)
+})     
+    </pre>
+      </div>
+        <div class="col s12 m3 black white-text">
+          <h5>Console</h5>
+          <div class="divider"></div>
+            <ul class="collection">
+              <small>
+                <li class="collection-item black white-text">This is in the then Success</li>
+              </small>
+            </ul>
+        </div> 
+    </div>   
+  </div>
+  
+  <div class="divider"></div>
+
+<div class="row">
+    <div class="col s12 text-align-center">
+      <h2>Example using callbacks</h2>
+    </div> 
+    <div class="row">
+      <div class="col s12 m9">
+    <pre>
+const userLeft = false
+const userWatchingCatMeme = false
+
+function watchTutorialCallback(callback, errorCallback) {
+  if (userLeft) {
+    errorCallback({
+      name: 'User Left',
+      message: ':('
+    })
+  } else if(userWatchingCatMeme) {
+    errorCallback({
+      name: 'User Watching Cat Meme',
+      message: 'WebDevSimplified < Cat'
+    })
+  } else {
+    callback('Thumbs up and Subscribe')
+  }
+}
+<b>
+watchTutorialCallback((message) => {
+  console.log('Success: ' + message)
+}, (error) => {
+    console.log(error.name + '' + error.message)
+})  
+</b>
+    </pre>
+      </div>
+        <div class="col s12 m3 black white-text">
+          <h5>Console</h5>
+          <div class="divider"></div>
+            <ul class="collection">
+              <small>
+                <li class="collection-item black white-text">Success: Thumbs up and Subscribe</li>
+              </small>
+            </ul>
+        </div> 
+    </div>   
+  </div>
+
+  <div class="divider"></div>
+
+<div class="row">
+    <div class="col s12 text-align-center">
+      <h2>Example using Promises</h2>
+    </div> 
+    <div class="row">
+      <div class="col s12 m9">
+    <pre>
+const userLeft = false
+const userWatchingCatMeme = true
+
+function watchTutorialPromise() {
+  return new Promise((resolve, reject) => {
+    if (userLeft) {
+      reject({
+        name: 'User Left',
+        message: ':('
+      })
+    } else if(userWatchingCatMeme) {
+      reject({
+        name: 'User Watching Cat Meme',
+        message: 'WebDevSimplified < Cat'
+      })
+    } else {
+      resolve('Thumbs up and Subscribe')
+    }
+  })
+}
+<b>
+watchTutorialPromise()
+  .then((message) => {
+    console.log('Success: ' + message)
+  })
+  .catch((error) => {
+    console.log(error.name + ' ' + error.message)
+  })
+</b>
+    </pre>
+      </div>
+        <div class="col s12 m3 black white-text">
+          <h5>Console</h5>
+          <div class="divider"></div>
+            <ul class="collection">
+              <small>
+                <li class="collection-item black white-text">User Watching Cat Meme</li>
+                <li class="collection-item black white-text">WebDevSimplified < Cat</li>
+              </small>
+            </ul>
+        </div> 
+    </div>   
+  </div>
+
+</div>  
+
+  <script src="promises.js"></script>
+</body>
+</html>
